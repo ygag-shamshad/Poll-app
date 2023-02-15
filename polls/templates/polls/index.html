@@ -1,0 +1,23 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+	<h1 style="text-align: center;">Questions</h1>
+	<hr>
+
+	{% if latest_question_list %}
+	<hr>
+<ul style="list-style-type: none; display: flex; justify-content: center; flex-wrap: wrap;"><hr>
+	{% for question in latest_question_list %}
+	<li style="margin: 10px; font-size: 20px;"><hr><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a><hr></li><hr>
+	{% endfor %}
+</ul><hr><hr>
+{% else %}
+<p style="text-align: center;">No polls are available.</p>
+{% endif %}
+</body>
+</html>

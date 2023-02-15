@@ -1,0 +1,36 @@
+{%load static%}
+<html>
+    <head>
+        <title>Detail</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    </head>
+    <body>
+
+        <form action="{% url 'polls:vote' object.id %}" method="post" style="display: flex; flex-direction: column; align-items: center;">
+
+            {% csrf_token %}
+            
+            <fieldset style="width: 50%;">
+                <legend><h1 style="text-align: center;">{{ object.question_text }} </h1></legend>
+                
+                {% if error_message %}
+                <p><strong style="color: red; text-align: center;">{{ error_message }} </strong></p>
+                {% endif %}
+
+                {% for choice in object.choice_set.all %}
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                  <input type="radio" name="choice" value="{{ choice.id }}" id="choice{{ forloop.counter }}" style="margin-right: 10px;">
+                
+                  <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                </div>
+                {% endfor %}
+
+            </fieldset>
+            <br>
+            <input type="submit" value="Vote" class="btn">
+        </form>
+        <a href="{% url 'polls:index' %}" style="margin-top: 20px;">Back to Questions</a>
+        
+
+    </body>
+</html>

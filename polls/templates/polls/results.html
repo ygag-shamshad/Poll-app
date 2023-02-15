@@ -1,0 +1,36 @@
+{%load static%}
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    </head>
+    <body>
+        <fieldset>
+        <legend><h1 style="text-align: center;">{{ object.question_text }}</h1></legend>
+        <fieldset>
+        <legend><h4 style="text-align: center;">Published on: {{object.pub_date}}</h4></legend>
+        <table border="2" style="margin: 0 auto;">
+            <tr>
+                <th style="padding: 10px;">Choice</th>
+                <th style="padding: 10px;">No. of Votes</th>
+            </tr>
+
+            {% for choice in object.choice_set.all %}
+            <tr align="center">
+                <td style="padding: 10px;">{{ choice.choice_text }} &emsp;</td>
+                <td style="padding: 10px;"> {{ choice.votes }}</td>
+            </tr>
+            {% endfor %}
+
+
+        </table> <br><br>
+
+    </fieldset></fieldset>
+        <h3 style="text-align: center;">Vote Again?</h3>
+    
+            <center><a href="{% url 'polls:detail' object.id %}" class="link" style="font-size: 20px;">👉🏻 Click Here 👈🏻</a></center>
+            <br><br>
+        <a href="{% url 'polls:index' %}" style="float: right;">Home</a>
+
+    </body>
+</html>

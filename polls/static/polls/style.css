@@ -1,0 +1,63 @@
+body{
+    background: white url("images/background.jpeg")  no-repeat;
+    /* background-size: cover; */
+}
+li a{
+    color: green;
+    text-decoration: none;
+}
+li a:hover{
+    color: wheat;
+}
+a{
+    color: cornflowerblue;
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(198, 19, 31);
+}
+
+label{
+    color: brown;
+}
+label:hover{
+    color: blueviolet;
+}
+
+.link{
+    text-decoration: None;
+    color: rgb(208, 107, 107);
+}
+
+h1,h2,h3,h5,h6{
+    color: aliceblue;
+}
+
+h4{
+    color: burlywood;
+}
+
+table{
+    color: aqua;
+    border-color: blue;
+}
+table:hover{
+    color: rgb(201, 225, 225);
+    border-color: rgb(81, 81, 94);
+}
+
+fieldset{
+    border-color: yellow;
+}
+
+.btn{
+    padding: 5px 25px; 
+    font-size: 18px;
+    background-color: aqua;
+}
+.btn:hover{
+    padding: 5px 25px; 
+    font-size: 18px;
+    background-color: rgb(0, 30, 255);
+    color: white;
+}

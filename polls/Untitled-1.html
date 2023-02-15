@@ -1,0 +1,273 @@
+index.html
+---------------------------
+
+
+<h1>Latest Questions</h1>
+
+<ul>
+{% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+
+
+detail.html
+---------------------------
+
+
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>
+
+<a href="{% url 'polls:index' %}">Back to question list</a>
+
+
+
+
+results.html
+---------------------------
+
+
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again</a>
+
+
+
+
+
+
+
+
+{% url 'polls:vote' question.id %}
+
+
+{% url 'polls:detail' question.id %}
+
+
+
+
+
+
+
+<html>
+    <head>
+        <title>Results</title>
+    </head>
+    <body>
+        <fieldset>
+        <legend><h1>{{ object.question_text }}</h1></legend>
+        <fieldset>
+        <legend><h4>Published on: {{object.pub_date}}</h4></legend>
+        <ul>
+
+            {% for choice in object.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+
+
+        <br><br>
+
+    </fieldset></fieldset>
+        Vote Again?
+        <br>
+            <a href="{% url 'polls:detail' object.id %}" style="text-decoration: None;color: rgb(208, 107, 107);">👉🏻 Click Here 👈🏻</a>
+            <br><br>
+        <a href="{% url 'polls:index' %}">Home</a>
+    </body>
+</html>
+
+
+
+
+
+index
+=======
+<body style="background-color: black;color: white;"></body>
+<li><a href="{% url 'polls:detail' question.id %}" style="text-decoration: None;color: aliceblue;">{{ question.question_text }}</a></li>
+
+
+
+Asia/Calcutta
+TIME_ZONE = 'UTC'
+
+
+
+Father: 62-38-93-69-78
+sadiq:  95-26-86-83-84
+muneer: 75-10-64-53-94
+
+
+Qdr0u%gklleyRYO
+
+
+
+
+
+
+
+{%load static%}
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    </head>
+    <body>
+        <fieldset>
+        <legend><h1>{{ object.question_text }}</h1></legend>
+        <fieldset>
+        <legend><h4>Published on: {{object.pub_date}}</h4></legend>
+        <ul>
+
+            {% for choice in object.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+
+
+        <br><br>
+
+    </fieldset></fieldset>
+        Vote Again?
+        <br>
+            <a href="{% url 'polls:detail' object.id %}" class="link">👉🏻 Click Here 👈🏻</a>
+            <br><br>
+        <a href="{% url 'polls:index' %}">Home</a>
+    </body>
+</html>
+
+
+
+
+
+before GPT
+====================
+Details
+---------------------------
+{%load static%}
+<html>
+    <head>
+        <title>Detail</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    </head>
+    <body>
+
+        <form action="{% url 'polls:vote' object.id %}" method="post">
+
+            
+            {% csrf_token %}
+            
+            <fieldset>
+                <legend><h1>{{ object.question_text }} </h1></legend>
+                
+                {% if error_message %}
+                <p><strong>{{ error_message }} </strong></p>
+                {% endif %}
+
+                {% for choice in object.choice_set.all %}
+                <input type="radio" name="choice" value="{{ choice.id }}" id="choice{{ forloop.counter }}">
+                
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                {% endfor %}
+
+            </fieldset>
+            <br>
+            <input type="submit" value="Vote">
+        </form>
+        <a href="{% url 'polls:index' %}">Back to Questions</a>
+        
+
+    </body>
+</html>
+
+
+Index
+---------------------
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+	<h1>Questions</h1>
+	<hr>
+
+	{% if latest_question_list %}
+<ul>
+	{% for question in latest_question_list %}
+	<li type="circle"><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
+
+
+
+
+
+results
+---------------------{%load static%}
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    </head>
+    <body>
+        <fieldset>
+        <legend><h1>{{ object.question_text }}</h1></legend>
+        <fieldset>
+        <legend><h4>Published on: {{object.pub_date}}</h4></legend>
+        <table border="2">
+            <tr>
+                <th>Choice</th>
+                <th>No. of Votes</th>
+            </tr>
+
+            {% for choice in object.choice_set.all %}
+            <tr align="center">
+                <td>{{ choice.choice_text }} &emsp;</td>
+                <td> {{ choice.votes }}</td>
+            </tr>
+            {% endfor %}
+
+
+        </table> <br><br>
+
+    </fieldset></fieldset>
+        Vote Again?
+        <br>
+            <a href="{% url 'polls:detail' object.id %}" class="link">👉🏻 Click Here 👈🏻</a>
+            <br><br>
+        <a href="{% url 'polls:index' %}">Home</a>
+
+    </body>
+</html>
